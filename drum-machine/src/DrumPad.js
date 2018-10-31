@@ -64,8 +64,8 @@ export default class DrumPad extends React.Component {
         super(props);
 
         this.state = {
-            tune: null,
             volume: 100,
+            lastPlayed: null,
         };
     }
 
@@ -82,19 +82,27 @@ export default class DrumPad extends React.Component {
         audio.play();
 
         this.setState({
-            tune: k.id,
+            lastPlayed: k,
         });
     };
 
-
+    changeColor = (k) => {
+        this.setState({white: !this.state.white})
+    };
 
     render() {
         return (
             <div>
                 <h1 className="text-center" style={{color: 'white'}}>Click or press a button to start playing</h1>
 
-                {keyIdentifiers.map((k, i) => <Pad audioPlayCb={this.playAudio} sample={k}/>)}
-                <DisplayTuneName tune={this.state.tune} />
+                {keyIdentifiers.map(k => <Pad
+                    key={k.id}
+                    lastPlayed={this.state.lastPlayed}
+                    audioPlayCb={this.playAudio}
+                    onKeyDown={this.changeColor}
+                    sample={k}
+                />)}
+                <DisplayTuneName tune={this.state.lastPlayed && this.state.lastPlayed.id || null} />
 
             </div>
         )

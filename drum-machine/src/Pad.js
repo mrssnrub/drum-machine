@@ -1,6 +1,7 @@
 import React from 'react';
 
 
+
 export default class Pad extends React.Component {
     constructor(props) {
         super(props);
@@ -13,11 +14,14 @@ export default class Pad extends React.Component {
     }
 
     render() {
+        const isLastPressed = (this.props.lastPlayed !== null && this.props.lastPlayed.keyTrigger === this.props.sample.keyTrigger);
+        const classNames = isLastPressed && 'btn btn-lg btn-dark pad-btn pad-btn-active' || 'btn btn-lg btn-dark pad-btn';
+
         return (
             <div className="container text-center">
                 <div className="row">
                     <div className="col-lg-12">
-                <button className="btn btn-lg btn-dark" onClick={this.handleClick} style={{margin: '5px'}}>{this.props.sample.keyTrigger}</button>
+                <button className={classNames} onClick={this.handleClick} style={{margin: '5px'}}>{this.props.sample.keyTrigger}</button>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,21 @@
 h1 {
     padding: 25px;
 
+
 }
 
 button {
   width: 60px;
 
+
+}
+
+.pad-btn:active {
+    background: #02d8d8 !important;
+}
+
+.pad-btn-active {
+    background: #02d8d8 !important;
 }
 
 h3{
